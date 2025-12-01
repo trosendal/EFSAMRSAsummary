@@ -75,6 +75,8 @@ EFSAMRSAsummary::tableE8(path_csv = "tables_and_figures/MRSA_AnnexE_tableE8.csv"
 ## Table E9
 EFSAMRSAsummary::tableE9(path_csv = "tables_and_figures/MRSA_AnnexE_tableE9.csv")
 
+## Table E10
+EFSAMRSAsummary::tableE10(path_csv = "tables_and_figures/MRSA_AnnexE_tableE10.csv")
 
 ```
 
