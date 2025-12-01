@@ -6,6 +6,7 @@
 ##' @param years the years to filter
 ##' @import data.table
 ##' @return A plot
+##' @export
 figure1 <- function(df_prev = read_prev(),
                     years =  c(2023, 2024)) {
     tab1 <- df_prev[year %in% years & source == "food",

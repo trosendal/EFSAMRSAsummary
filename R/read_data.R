@@ -16,6 +16,7 @@
 ##' @param years The years to be included in the filtered data
 ##' @return a data.table object
 ##' @importFrom readxl read_xlsx
+##' @export
 ##' @import data.table
 read_prev <- function(path = "inst/extdata/prevalence MRSA all data.xlsx",
                       years = c("2023", "2024")) {
@@ -121,7 +122,9 @@ read_prev <- function(path = "inst/extdata/prevalence MRSA all data.xlsx",
 ##' @param spa2ST Rules for how to classify isoaltes with spatype but no ST
 ##' @param ST2CC Rules for how to classify isolates with ST but no CC
 ##' @param AB shortforms of AB
+##' @import data.table
 ##' @return A data.table object
+##' @export
 read_AMR <- function(path = "inst/extdata/MRSA AMR 2023-2024.xlsx",
                      sheet = "QUERY_FOR_FULL_AMR_ISOL_DAT_000",
                      EUvet =
@@ -310,8 +313,14 @@ read_AMR <- function(path = "inst/extdata/MRSA AMR 2023-2024.xlsx",
     df_AMR[order(LABISOLCODE, substance), ]
 }
 
-## Summarize AMR data at the sample level
-## Sort in order to keep the fingerprints consistent
+##' collapse_AMR
+##'
+##' Summarize AMR data at the sample level Sort in order to keep the
+##' fingerprints consistent
+##'
+##' @param df_AMR the dataobject wity AMR at the isolate level
+##' @return a data.table object
+##' @export
 collapse_AMR <- function(df_AMR) {
     ## Ensure data is sorted
     df_AMR <- df_AMR[order(LABISOLCODE, SFsubstance), ]
