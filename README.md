@@ -29,6 +29,13 @@ pdf("inst/tables_and_figures/figure1.pdf",
     timestamp = FALSE)
 EFSAMRSAsummary::figure1()
 dev.off()
+
+pdf("tables_and_figures/figure2.pdf",
+    height = 12,
+    width = 8,
+    timestamp = FALSE)
+EFSAMRSAsummary::figure2()
+dev.off()
 ```
 
 ## Future development

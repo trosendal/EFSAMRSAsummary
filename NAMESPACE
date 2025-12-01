@@ -2,6 +2,7 @@
 
 export(collapse_AMR)
 export(figure1)
+export(figure2)
 export(read_AMR)
 export(read_prev)
 import(data.table)
