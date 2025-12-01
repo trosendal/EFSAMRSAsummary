@@ -1,8 +1,7 @@
-##' tableE4
+##' tableE5
 ##'
-##' Produce Annex E table 4: Methicillin-resistant Staphylococcus
-##' aureus in food-producing animals, clinical investigations
-##' excluded, 2023.
+##' Produce Annex E table 5: Methicillin-resistant Staphylococcus aureus in
+##' food-producing animals, clinical investigations, 2024.
 ##'
 ##' @param df_prev The data object
 ##' @param year the year to filter
@@ -10,14 +9,15 @@
 ##' @import data.table
 ##' @return path to a csv file
 ##' @export
-tableE4 <- function(df_prev = read_prev(),
-                    year =  2023,
+tableE5 <- function(df_prev = read_prev(),
+                    year =  2024,
                     path_csv = tempfile(fileext = ".csv")) {
     stopifnot(identical(length(year), 1L))
-    nonfood <- c("Dogs", "Felidae", "Solipeds, domestic")
+    nonfood <- c("Dogs", "Felidae", "Solipeds, domestic",
+                 "Land game mammals")
     tab1 <- df_prev[source == "animal" &
                     year == year &
-                    SAMPCONTEXT != "Clinical investigations" &
+                    SAMPCONTEXT == "Clinical investigations" &
                     !(matrix %in% nonfood),
                     .(N = sum(N), n = sum(n), prop = sum(n) / sum(N)),
                     by = .(type = matrix,
@@ -27,9 +27,8 @@ tableE4 <- function(df_prev = read_prev(),
     tab1 <- tab1[order(type, country, desc, unit)]
     tab1$result <- paste0(tab1$n, " (", round(tab1$prop * 100, 1), "%)")
     tab1 <- tab1[, c(1, 2, 3, 4, 5, 8)]
-    names(tab1) <- c("Animal", "Country", "Production type",
-                     "Sample unit", "Units tested",
-                     "Positive for MRSA (%)")
+    names(tab1) <- c("Animal", "Country", "Production type", "Sample unit",
+                     "Units tested", "Positive for MRSA (%)")
     write.csv2(tab1,
                file = path_csv,
                row.names = FALSE)
