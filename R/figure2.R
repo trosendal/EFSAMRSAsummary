@@ -68,8 +68,3 @@ legend(x = -800, y = -3,
     xpd = TRUE,
     cex = 0.9)
 dev.off()
-## This of course requires that your system has image magick installed
-## but otherwise you just have to deal with the pdf figure
-system(paste("magick -density 300 tables_and_figures/figure2.pdf -quality 100",
-             "-background white -alpha remove ",
-             "-strip -define png:exclude-chunk=time tables_and_figures/figure2.png"))
