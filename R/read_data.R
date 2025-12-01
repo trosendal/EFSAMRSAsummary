@@ -1,5 +1,3 @@
-library(readxl)
-library(data.table)
 ##' read_prev
 ##'
 ##' A function that reads the MRSA prevalence data reported by member
@@ -321,7 +319,8 @@ collapse_AMR <- function(df_AMR) {
         with(df_AMR[df_AMR$LABISOLCODE == x, ], expr = {
             n <- sum(HRM_is_resistant == 1)
             innersubstance <- as.character(SFsubstance)
-            fingerprint <- paste(innersubstance[as.numeric(HRM_is_resistant) == 1], collapse = "-")
+            fingerprint <- paste(innersubstance[as.numeric(HRM_is_resistant) == 1],
+                                 collapse = "-")
             res <- as.data.frame(matrix(as.numeric(HRM_is_resistant), ncol = 19))
             names(res) <- SFsubstance
             df0 <- as.data.frame.matrix(t(table(EUvet[HRM_is_resistant == 1])))
@@ -340,23 +339,4 @@ collapse_AMR <- function(df_AMR) {
             cbind(df1, res, df0)
         })
     }))
-}
-
-## Utility function to cleanup environment to avoid interactions
-## between code chunks in scripts
-cleanup_env <- function() {
-    rm(list = ls(envir = .GlobalEnv), envir = .GlobalEnv)
-    gc()
-
-    ## Detach non-base packages
-    pkgs <- grep("^package:", search(), value = TRUE)
-    base_pkgs <- paste0("package:", c("stats", "graphics", "grDevices",
-                                      "utils", "datasets", "methods", "base"))
-    for (p in setdiff(pkgs, base_pkgs)) {
-        detach(p, character.only = TRUE, unload = TRUE)
-    }
-
-    ## Close all graphics devices
-    while (!is.null(dev.list())) dev.off()
-    invisible(NULL)
 }
