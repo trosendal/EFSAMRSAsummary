@@ -20,7 +20,7 @@ tableE12 <- function(df_AMR = read_AMR(),
                              df_AMR_collapse$n > 2, ]
     patterns <- names(sort(table(subdf$fingerprint), decreasing = TRUE))
     subdf$fingerprint <- factor(subdf$fingerprint, levels = patterns)
-    tab13 <- do.call("cbind", lapply(unique(subdf$country), function(x) {
+    tab <- do.call("cbind", lapply(unique(subdf$country), function(x) {
         dfinner1 <- subdf[subdf$country == x, ]
         do.call("cbind", lapply(unique(dfinner1$matrix), function(z) {
             dfinner2 <- dfinner1[dfinner1$matrix == z, ]
@@ -32,15 +32,15 @@ tableE12 <- function(df_AMR = read_AMR(),
             c(country = x, matrix = mat_txt, occ)
         }))
     }))
-    foo <- as.numeric(sapply(strsplit(tab13, " "), "[", 1))
-    dim(foo) <- dim(tab13)
+    foo <- as.numeric(sapply(strsplit(tab, " "), "[", 1))
+    dim(foo) <- dim(tab)
     foo <- rowSums(foo, na.rm = TRUE)
     foo <- paste0(foo, " (", round(foo/sum(foo) * 100, 1), ")")
     foo[1:2] <- c("-", "Total")
-    tab13 <- cbind(c("Country", "Matrix", patterns), tab13, foo)
+    tab <- cbind(c("Country", "Matrix", patterns), tab, foo)
 
-    colnames(tab13) <- rep("", times = ncol(tab13))
-    write.csv2(tab13,
+    colnames(tab) <- rep("", times = ncol(tab))
+    write.csv2(tab,
                file = path_csv,
                row.names = FALSE,
                quote = TRUE)
