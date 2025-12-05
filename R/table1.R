@@ -4,9 +4,9 @@
 ##' Produce Table 1 in the main chapter
 ##'
 ##' @param df_AMR The isolate based data object
-##' @param years the years to filter
 ##' @param path_csv path to the output csv file
 ##' @import data.table
+##' @importFrom utils write.csv2
 ##' @return A path to a csv file
 ##' @export
 table1 <- function(df_AMR = read_AMR(),

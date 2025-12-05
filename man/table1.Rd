@@ -10,8 +10,6 @@ table1(df_AMR = read_AMR(), path_csv = tempfile(fileext = ".csv"))
 \item{df_AMR}{The isolate based data object}
 
 \item{path_csv}{path to the output csv file}
-
-\item{years}{the years to filter}
 }
 \value{
 A path to a csv file

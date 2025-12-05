@@ -4,7 +4,6 @@
 ##' Produce Table 2 in the main chapter
 ##'
 ##' @param df_AMR The isolate based data object
-##' @param years the years to filter
 ##' @param path_csv path to the output csv file
 ##' @import data.table
 ##' @return A path to a csv file

@@ -5,6 +5,10 @@
 ##' @param df_prev The data object
 ##' @param years the years to filter
 ##' @import data.table
+##' @importFrom graphics barplot
+##' @importFrom graphics legend
+##' @importFrom graphics par
+##' @importFrom graphics text
 ##' @return A plot
 ##' @export
 figure1 <- function(df_prev = read_prev(),
