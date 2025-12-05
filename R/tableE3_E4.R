@@ -1,3 +1,23 @@
+##' tableE3
+##'
+##' Produce Annex E Table 3: Methicillin-resistant Staphylococcus
+##' aureus in food-producing animals, clinical investigations
+##' excluded, 2024.
+##'
+##' @param df_prev The data object
+##' @param year the year to filter
+##' @param path_csv path to a csv file
+##' @import data.table
+##' @return path to a csv file
+##' @export
+tableE3 <- function(df_prev = read_prev(),
+                    year =  2024,
+                    path_csv = tempfile(fileext = ".csv")) {
+    tableE3_E4_inner(df_prev,
+                     year,
+                     path_csv)
+}
+
 ##' tableE4
 ##'
 ##' Produce Annex E table 4: Methicillin-resistant Staphylococcus
@@ -13,6 +33,21 @@
 tableE4 <- function(df_prev = read_prev(),
                     year =  2023,
                     path_csv = tempfile(fileext = ".csv")) {
+    tableE3_E4_inner(df_prev,
+                     year,
+                     path_csv)
+}
+
+##' tableE3_E4_inner
+##'
+##' @param df_prev
+##' @param year
+##' @param path_csv
+##' @return a path to a csv file
+tableE3_E4_inner <- function(df_prev = read_prev(),
+                             year =  NULL,
+                             path_csv = tempfile(fileext = ".csv")) {
+    stopifnot(is.numeric(year))
     env <- environment()
     stopifnot(identical(length(year), 1L))
     nonfood <- c("Dogs", "Felidae", "Solipeds, domestic")
