@@ -18,7 +18,7 @@ tableE4 <- function(df_prev = read_prev(),
     nonfood <- c("Dogs", "Felidae", "Solipeds, domestic")
     tab1 <- df_prev[source == "animal" &
                     year == get("year", envir = env) &
-                    SAMPCONTEXT != "Clinical investigations" &
+                    !(SAMPCONTEXT %in% c("Clinical investigations", "Outbreak investigation")) &
                     !(matrix %in% nonfood),
                     .(N = sum(N), n = sum(n), prop = sum(n) / sum(N)),
                     by = .(type = matrix,
