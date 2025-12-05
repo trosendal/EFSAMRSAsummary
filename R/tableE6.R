@@ -5,21 +5,28 @@
 ##'
 ##' @param df_prev The data object
 ##' @param year the year to filter
+##' @param food logical if you want food (TRUE) or nonfood (FALSE)
 ##' @param path_csv path to a csv file
 ##' @import data.table
 ##' @return path to a csv file
 ##' @export
 tableE6 <- function(df_prev = read_prev(),
                     year =  2024,
+                    food = FALSE,
                     path_csv = tempfile(fileext = ".csv")) {
     env <- environment()
     stopifnot(identical(length(year), 1L))
     nonfood <- c("Dogs", "Felidae", "Solipeds, domestic",
                  "Land game mammals")
-    tab1 <- df_prev[source == "animal" &
-                    year == get("year", envir = env) &
-                    SAMPCONTEXT == "Clinical investigations" &
-                    matrix %in% nonfood,
+    tab1 <- df_prev[
+    {
+        i <- source == "animal" &
+             year == get("year", envir = env) &
+             SAMPCONTEXT == "Clinical investigations"
+        if (get("food", envir = env)) j <- !(matrix %in% nonfood)
+        else {j <- (matrix %in% nonfood)}
+        i & j
+    },
                     .(N = sum(N), n = sum(n), prop = sum(n) / sum(N)),
                     by = .(type = matrix,
                            country = country,

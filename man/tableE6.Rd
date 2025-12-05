@@ -7,6 +7,7 @@
 tableE6(
   df_prev = read_prev(),
   year = 2024,
+  food = FALSE,
   path_csv = tempfile(fileext = ".csv")
 )
 }
@@ -14,6 +15,8 @@ tableE6(
 \item{df_prev}{The data object}
 
 \item{year}{the year to filter}
+
+\item{food}{logical if you want food (TRUE) or nonfood (FALSE)}
 
 \item{path_csv}{path to a csv file}
 }
