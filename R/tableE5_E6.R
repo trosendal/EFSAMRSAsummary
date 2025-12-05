@@ -1,3 +1,25 @@
+##' tableE5
+##'
+##' Produce Annex E table 5: Methicillin-resistant Staphylococcus aureus in
+##' food-producing animals, clinical investigations, 2024.
+##'
+##' @param df_prev The data object
+##' @param year the year to filter
+##' @param food logical if you want food (TRUE) or nonfood (FALSE)
+##' @param path_csv path to a csv file
+##' @import data.table
+##' @return path to a csv file
+##' @export
+tableE5 <- function(df_prev = read_prev(),
+                    year =  2024,
+                    food = TRUE,
+                    path_csv = tempfile(fileext = ".csv")) {
+    tableE5_E6_inner(df_prev,
+                     year,
+                     food,
+                     path_csv)
+}
+
 ##' tableE6
 ##'
 ##' Produce Annex E table 6: Methicillin-resistant Staphylococcus aureus in
@@ -14,6 +36,27 @@ tableE6 <- function(df_prev = read_prev(),
                     year =  2024,
                     food = FALSE,
                     path_csv = tempfile(fileext = ".csv")) {
+    tableE5_E6_inner(df_prev,
+                     year,
+                     food,
+                     path_csv)
+}
+
+##' tableE5_E6
+##'
+##' Produce a table
+##'
+##' @param df_prev The data object
+##' @param year the year to filter
+##' @param food logical if you want food (TRUE) or nonfood (FALSE)
+##' @param path_csv path to a csv file
+##' @import data.table
+##' @return path to a csv file
+tableE5_E6_inner <- function(df_prev = read_prev(),
+                             year =  NULL,
+                             food = FALSE,
+                             path_csv = tempfile(fileext = ".csv")) {
+    stopifnot(is.numeric(year))
     env <- environment()
     stopifnot(identical(length(year), 1L))
     nonfood <- c("Dogs", "Felidae", "Solipeds, domestic",
