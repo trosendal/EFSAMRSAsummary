@@ -12,6 +12,40 @@
 tableE1 <- function(df_prev = read_prev(),
                     year =  2024,
                     path_csv = tempfile(fileext = ".csv")) {
+    table1_2_inner(df_prev,
+                   year,
+                   path_csv)
+}
+
+##' tableE2
+##'
+##' Produce Annex E Table 2: Methicillin-resistant Staphylococcus
+##' aureus in food, 2023.
+##'
+##' @param df_prev The data object
+##' @param year the year to filter
+##' @param path_csv path to a csv file
+##' @import data.table
+##' @return path to a csv file
+##' @export
+tableE2 <- function(df_prev = read_prev(),
+                    year =  2023,
+                    path_csv = tempfile(fileext = ".csv")) {
+    table1_2_inner(df_prev,
+                   year,
+                   path_csv)
+}
+
+##' table1_2_inner
+##'
+##' @param df_prev The data object
+##' @param year the year to filter
+##' @param path_csv path to a csv file
+##' @return a file path
+table1_2_inner <- function(df_prev = read_prev(),
+                           year =  NULL,
+                           path_csv = tempfile(fileext = ".csv")) {
+    stopifnot(is.numeric(year))
     env <- environment()
     stopifnot(identical(length(year), 1L))
     tab1 <- df_prev[year == get("year", envir = env) &
