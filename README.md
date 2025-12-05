@@ -21,7 +21,15 @@ track changes to turned off. If track changes are enabled then copy
 paste of large tables gets very messy.
 
 ## Usage
-All tables and figures can be produced like this:
+To use this package you need to install it first in R. A convenient
+way to do that is like this:
+```R
+remotes::install_github("trosendal/EFSAMRSAsummary", upgrade = "never")
+```
+
+Once installed you can build all the tables and figures like
+this. They will be saved in a directory where you are running R from
+named: "output":
 
 ```R
 if (!dir.exists("output")) {
