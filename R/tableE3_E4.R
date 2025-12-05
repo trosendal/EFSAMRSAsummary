@@ -40,9 +40,11 @@ tableE4 <- function(df_prev = read_prev(),
 
 ##' tableE3_E4_inner
 ##'
-##' @param df_prev
-##' @param year
-##' @param path_csv
+##' Produce a table
+##'
+##' @param df_prev The data object
+##' @param year the year to filter
+##' @param path_csv path to csv file
 ##' @return a path to a csv file
 tableE3_E4_inner <- function(df_prev = read_prev(),
                              year =  NULL,

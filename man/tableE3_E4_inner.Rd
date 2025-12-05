@@ -10,9 +10,16 @@ tableE3_E4_inner(
   path_csv = tempfile(fileext = ".csv")
 )
 }
+\arguments{
+\item{df_prev}{The data object}
+
+\item{year}{the year to filter}
+
+\item{path_csv}{path to csv file}
+}
 \value{
 a path to a csv file
 }
 \description{
-tableE3_E4_inner
+Produce a table
 }
