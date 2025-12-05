@@ -4,8 +4,7 @@
 This is a collection of methods to clean data from reporting counties
 and produce tables and figures for the MRSA chapter of the AMR
 report. Some figures are produced elsewhere but all tables should be
-producible by these methods for the MRSA chapter and the MRSA annex
-E.
+producible by these methods for the MRSA chapter and the MRSA annex E.
 
 The tables are produced in csv format and subsequently need to be
 tidied up a little in word to make the final result. This is achieved
@@ -22,6 +21,7 @@ track changes to turned off. If track changes are enabled then copy
 paste of large tables gets very messy.
 
 ## Usage
+All tables and figures can be produced like this:
 
 ```R
 if (!dir.exists("output")) {
@@ -86,7 +86,6 @@ EFSAMRSAsummary::tableE12(path_csv = "tables_and_figures/MRSA_AnnexE_tableE12.cs
 
 ## Table E13
 EFSAMRSAsummary::tableE13(path_csv = "tables_and_figures/MRSA_AnnexE_tableE13.csv")
-
 ```
 
 ## Future development
