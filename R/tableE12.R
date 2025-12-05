@@ -39,6 +39,7 @@ tableE12 <- function(df_AMR = read_AMR(),
     foo[1:2] <- c("-", "Total")
     tab13 <- cbind(c("Country", "Matrix", patterns), tab13, foo)
 
+    colnames(tab13) <- rep("", times = ncol(tab13))
     write.csv2(tab13,
                file = path_csv,
                row.names = FALSE,

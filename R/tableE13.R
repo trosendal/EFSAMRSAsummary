@@ -38,6 +38,7 @@ tableE13 <- function(df_AMR = read_AMR(),
     foo <- paste0(foo, " (", round(foo/sum(foo) * 100, 1), ")")
     foo[1:2] <- c("-", "Total")
     tab14 <- cbind(c("Country", "Matrix", patterns), tab14, foo)
+    colnames(tab14) <- rep("", times = ncol(tab14))
     write.csv2(tab14,
                file = path_csv,
                row.names = FALSE,
