@@ -42,6 +42,29 @@ tableE6 <- function(df_prev = read_prev(),
                      path_csv)
 }
 
+##' tableE7
+##'
+##' Produce Annex E table 7: Methicillin-resistant Staphylococcus
+##' aureus in non-food-producing animals, clinical investigations,
+##' 2023.
+##'
+##' @param df_prev The data object
+##' @param year the year to filter
+##' @param food logical if you want food (TRUE) or nonfood (FALSE)
+##' @param path_csv path to a csv file
+##' @import data.table
+##' @return path to a csv file
+##' @export
+tableE7 <- function(df_prev = read_prev(),
+                    year =  2023,
+                    food = FALSE,
+                    path_csv = tempfile(fileext = ".csv")) {
+    tableE5_E6_inner(df_prev,
+                     year,
+                     food,
+                     path_csv)
+}
+
 ##' tableE5_E6
 ##'
 ##' Produce a table
