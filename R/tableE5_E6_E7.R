@@ -14,10 +14,10 @@ tableE5 <- function(df_prev = read_prev(),
                     year =  2024,
                     food = TRUE,
                     path_csv = tempfile(fileext = ".csv")) {
-    tableE5_E6_inner(df_prev,
-                     year,
-                     food,
-                     path_csv)
+    tableE5_E6_E7_inner(df_prev,
+                        year,
+                        food,
+                        path_csv)
 }
 
 ##' tableE6
@@ -36,10 +36,10 @@ tableE6 <- function(df_prev = read_prev(),
                     year =  2024,
                     food = FALSE,
                     path_csv = tempfile(fileext = ".csv")) {
-    tableE5_E6_inner(df_prev,
-                     year,
-                     food,
-                     path_csv)
+    tableE5_E6_E7_inner(df_prev,
+                        year,
+                        food,
+                        path_csv)
 }
 
 ##' tableE7
@@ -59,13 +59,13 @@ tableE7 <- function(df_prev = read_prev(),
                     year =  2023,
                     food = FALSE,
                     path_csv = tempfile(fileext = ".csv")) {
-    tableE5_E6_inner(df_prev,
-                     year,
-                     food,
-                     path_csv)
+    tableE5_E6_E7_inner(df_prev,
+                        year,
+                        food,
+                        path_csv)
 }
 
-##' tableE5_E6
+##' tableE5_E6_E7_inner
 ##'
 ##' Produce a table
 ##'
@@ -75,10 +75,10 @@ tableE7 <- function(df_prev = read_prev(),
 ##' @param path_csv path to a csv file
 ##' @import data.table
 ##' @return path to a csv file
-tableE5_E6_inner <- function(df_prev = read_prev(),
-                             year =  NULL,
-                             food = FALSE,
-                             path_csv = tempfile(fileext = ".csv")) {
+tableE5_E6_E7_inner <- function(df_prev = read_prev(),
+                                year =  NULL,
+                                food = FALSE,
+                                path_csv = tempfile(fileext = ".csv")) {
     stopifnot(is.numeric(year))
     env <- environment()
     stopifnot(identical(length(year), 1L))
