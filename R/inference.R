@@ -54,3 +54,46 @@ spa2CC <- function(spa) {
                 )
     spa2CC[spa]
 }
+
+##' spa2ST
+##'
+##' @param spa a vector of spa's
+##' @return A vector of inferred ST from spa
+spa2ST <- function(spa) {
+    spa2ST <-
+        c("1419" = 9, "1430" = 9, "10204" = 9)
+    ## spa-types t1419, t1430 and t10204 were associated to ST9 (EFSA,
+    ## 2009a ; Hasman et al., 2011 ; Köck et al., 2013), and
+    ## classified as CC1 (PubMLST1).
+    spa2ST[spa]
+}
+
+##' AB
+##'
+##' Translate antibiotic names to shortform
+##'
+##' @param ab A vector of longform antibiotic names
+##' @return A vector of shortform names for antibiotics
+AB <- function(ab) {
+    AB <- c("Gentamicin" = "GEN",
+            "Kanamycin" = "KAN",
+            "Streptomycin" = "STR",
+            "Chloramphenicol" = "CHL",
+            "Rifampicin" = "RIF",
+            "Ciprofloxacin" = "CIP",
+            "Erythromycin" = "ERY",
+            "Clindamycin" = "CLI",
+            "Quinupristin/Dalfopristin" = "Q/D",
+            "Linezolid" = "LZD",
+            "Tiamulin" = "TIA",
+            "Mupirocin" = "MUP",
+            "Fusidic acid" = "FUS",
+            "Sulfamethoxazole" = "SMX",
+            "Trimethoprim" = "TMP",
+            "Tetracycline" = "TET",
+            "Vancomycin" = "VAN",
+            "Cefoxitin" = "CEF",
+            "Penicillin" = "PEN")
+    stopifnot(all(ab %in% names(AB)))
+    AB[ab]
+}

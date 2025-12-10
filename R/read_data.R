@@ -138,9 +138,6 @@ read_prev <- function(path = prev_file(),
 ##' @param sheet The name of the sheet to read
 ##' @param EUvet The classification of AB into levels of importance for public health
 ##' @param AntibioticClass The classification of AB into functional groups
-##' @param spa2CC Rules for how to classify isolates with spatype but no CC
-##' @param spa2ST Rules for how to classify isoaltes with spatype but no ST
-##' @param AB shortforms of AB
 ##' @import data.table
 ##' @return A data.table object
 ##' @export
@@ -185,31 +182,8 @@ read_AMR <- function(path = isolate_file(),
                            "Tetracycline" = "Tetracycline",
                            "Tiamulin" = "Pleuromutilin",
                            "Trimethoprim" = "Dihydrofolate reductase inhibitor",
-                           "Vancomycin" = "Glycopeptide"),
-                     spa2ST =
-                         c("1419" = 9, "1430" = 9, "10204" = 9),
-                     ## spa-types t1419, t1430 and t10204 were associated to ST9 (EFSA,
-                     ## 2009a ; Hasman et al., 2011 ; Köck et al., 2013), and classified
-                     ## as CC1 (PubMLST1).
-                     AB = c("Gentamicin" = "GEN",
-                            "Kanamycin" = "KAN",
-                            "Streptomycin" = "STR",
-                            "Chloramphenicol" = "CHL",
-                            "Rifampicin" = "RIF",
-                            "Ciprofloxacin" = "CIP",
-                            "Erythromycin" = "ERY",
-                            "Clindamycin" = "CLI",
-                            "Quinupristin/Dalfopristin" = "Q/D",
-                            "Linezolid" = "LZD",
-                            "Tiamulin" = "TIA",
-                            "Mupirocin" = "MUP",
-                            "Fusidic acid" = "FUS",
-                            "Sulfamethoxazole" = "SMX",
-                            "Trimethoprim" = "TMP",
-                            "Tetracycline" = "TET",
-                            "Vancomycin" = "VAN",
-                            "Cefoxitin" = "CEF",
-                            "Penicillin" = "PEN")) {
+                           "Vancomycin" = "Glycopeptide")
+                     ) {
 
     ## Read in the AMR data from the last two years. This appears to
     ## contain the AMR testing of MRSA isolates which is les
@@ -236,7 +210,7 @@ read_AMR <- function(path = isolate_file(),
     df_AMR[, `:=` (
         EUvet = factor(EUvet[as.character(substance)], levels = c("A", "B", "C", "D")),
         class = AntibioticClass[as.character(substance)],
-        SFsubstance = AB[as.character(substance)]
+        SFsubstance = AB(as.character(substance))
     )]
     stopifnot(all(!is.na(df_AMR$EUvet)))
     stopifnot(all(!is.na(df_AMR$class)))
@@ -246,7 +220,7 @@ read_AMR <- function(path = isolate_file(),
     ## Update ST from spa
     df_AMR[, `:=` (ST_infer = {
         ST_infer <- ST
-        ST_infer[is.na(ST_infer)] <- spa2ST[.SD[["T"]]][is.na(ST_infer)]
+        ST_infer[is.na(ST_infer)] <- spa2ST(.SD[["T"]][is.na(ST_infer)])
         ST_infer
     }
     )]

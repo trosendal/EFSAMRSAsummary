@@ -21,14 +21,7 @@ read_AMR(
     Sulfamethoxazole = "Sulfonamide", Tetracycline = "Tetracycline", 
      Tiamulin =
     "Pleuromutilin", Trimethoprim = "Dihydrofolate reductase inhibitor", Vancomycin =
-    "Glycopeptide"),
-  spa2ST = c(`1419` = 9, `1430` = 9, `10204` = 9),
-  AB = c(Gentamicin = "GEN", Kanamycin = "KAN", Streptomycin = "STR", Chloramphenicol =
-    "CHL", Rifampicin = "RIF", Ciprofloxacin = "CIP", Erythromycin = "ERY", Clindamycin =
-    "CLI", `Quinupristin/Dalfopristin` = "Q/D", Linezolid = "LZD", Tiamulin = "TIA",
-    Mupirocin = "MUP", `Fusidic acid` = "FUS", Sulfamethoxazole = "SMX", Trimethoprim =
-    "TMP", Tetracycline = "TET", Vancomycin = "VAN", Cefoxitin = "CEF", Penicillin =
-    "PEN")
+    "Glycopeptide")
 )
 }
 \arguments{
@@ -39,12 +32,6 @@ read_AMR(
 \item{EUvet}{The classification of AB into levels of importance for public health}
 
 \item{AntibioticClass}{The classification of AB into functional groups}
-
-\item{spa2ST}{Rules for how to classify isoaltes with spatype but no ST}
-
-\item{AB}{shortforms of AB}
-
-\item{spa2CC}{Rules for how to classify isolates with spatype but no CC}
 }
 \value{
 A data.table object
