@@ -88,7 +88,7 @@ tableE5_E6_E7_inner <- function(df_prev = read_prev(),
     {
         i <- source == "animal" &
              year == get("year", envir = env) &
-             SAMPCONTEXT == "Clinical investigations"
+             SAMPCONTEXT %in% c("Clinical investigations", "Outbreak investigation")
         if (get("food", envir = env)) j <- !(matrix %in% nonfood)
         else {j <- (matrix %in% nonfood)}
         i & j

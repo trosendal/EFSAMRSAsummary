@@ -1,4 +1,6 @@
 "Animal";"Country";"Production type";"Sample unit";"Units tested";"Positive for MRSA (%)"
+"Cattle (bovine animals)";"Norway";"Cattle (bovine animals)";"animal";69;"13 (18.8%)"
+"Cattle (bovine animals)";"Norway";"Cattle (bovine animals)";"herd/flock";69;"27 (39.1%)"
 "Pigs";"Italy";"Pigs";"animal";1;"1 (100%)"
 "Pigs";"Netherlands";"Pigs - unspecified";"animal";20;"2 (10%)"
 "Pigs";"Norway";"Pigs - mixed herds";"animal";3;"0 (0%)"
