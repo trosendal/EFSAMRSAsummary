@@ -18,7 +18,15 @@ table1 <- function(spaprev = prev_by_SPA(),
     ## Just the CC398 spa types
     df <- spaprev[CC %in% c("398", "CC1/CC398")]
     df <- df[order(match(SPA, sortorder), Year, decreasing = TRUE)]
+    table123_inner(df,
+                   path_csv = path_csv)
+}
 
+##' table123_inner
+##'
+##' @param df the subset of prev_by_SPA
+##' @return A table
+table123_inner <- function(df, path_csv) {
     df <- df[, {
         years <- sort(levels(Year), decreasing = TRUE)
         ## First food
