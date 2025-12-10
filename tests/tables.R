@@ -12,13 +12,6 @@ stopifnot(
         readLines(system.file("extdata/tables_and_figures/table2.csv",
                               package = "EFSAMRSAsummary"))))
 
-## Table 3 (Not in actual chapter)
-stopifnot(
-    identical(
-        readLines(EFSAMRSAsummary::table3()),
-        readLines(system.file("extdata/tables_and_figures/table3.csv",
-                              package = "EFSAMRSAsummary"))))
-
 ## Table E1
 stopifnot(
     identical(
