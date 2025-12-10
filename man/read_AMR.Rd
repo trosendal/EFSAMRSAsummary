@@ -28,7 +28,6 @@ read_AMR(
     `10485` = 398, `19248` = 398, `899` = "CC1/CC398", `127` = 1, `2` = 5, `242` = 5, `8`
     = 8, `9` = 8, `1419` = 1, `1430` = 1, `10204` = 1, `1422` = 692, `3512` = 2343),
   spa2ST = c(`1419` = 9, `1430` = 9, `10204` = 9),
-  ST2CC = c(`9` = 1, `8325` = 1, `22` = 22),
   AB = c(Gentamicin = "GEN", Kanamycin = "KAN", Streptomycin = "STR", Chloramphenicol =
     "CHL", Rifampicin = "RIF", Ciprofloxacin = "CIP", Erythromycin = "ERY", Clindamycin =
     "CLI", `Quinupristin/Dalfopristin` = "Q/D", Linezolid = "LZD", Tiamulin = "TIA",
@@ -49,8 +48,6 @@ read_AMR(
 \item{spa2CC}{Rules for how to classify isolates with spatype but no CC}
 
 \item{spa2ST}{Rules for how to classify isoaltes with spatype but no ST}
-
-\item{ST2CC}{Rules for how to classify isolates with ST but no CC}
 
 \item{AB}{shortforms of AB}
 }

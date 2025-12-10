@@ -140,7 +140,6 @@ read_prev <- function(path = prev_file(),
 ##' @param AntibioticClass The classification of AB into functional groups
 ##' @param spa2CC Rules for how to classify isolates with spatype but no CC
 ##' @param spa2ST Rules for how to classify isoaltes with spatype but no ST
-##' @param ST2CC Rules for how to classify isolates with ST but no CC
 ##' @param AB shortforms of AB
 ##' @import data.table
 ##' @return A data.table object
@@ -228,9 +227,6 @@ read_AMR <- function(path = isolate_file(),
                      ## spa-types t1419, t1430 and t10204 were associated to ST9 (EFSA,
                      ## 2009a ; Hasman et al., 2011 ; Köck et al., 2013), and classified
                      ## as CC1 (PubMLST1).
-                     ST2CC = c("9" = 1, "8325" = 1, "22" = 22),
-                     ## STs 9 and 8325 were classified as CC1 by PubMLST1.
-                     ## ST22 was classified as CC22 by PubMLST1.
                      AB = c("Gentamicin" = "GEN",
                             "Kanamycin" = "KAN",
                             "Streptomycin" = "STR",
@@ -295,7 +291,7 @@ read_AMR <- function(path = isolate_file(),
     df_AMR[, `:=` (CC_infer = {
         CC_infer <- CC
         CC_infer[is.na(CC_infer)] <- spa2CC[.SD[["T"]]][is.na(CC_infer)]
-        CC_infer[is.na(CC_infer)] <- ST2CC[ST_infer][is.na(CC_infer)]
+        CC_infer[is.na(CC_infer)] <- ST2CC(ST_infer[is.na(CC_infer)])
         CC_infer
     }
     )]
