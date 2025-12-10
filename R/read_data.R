@@ -56,6 +56,7 @@ read_prev <- function(path = prev_file(),
     ## Drop those that are reported below the country level
     df_prev <- df_prev[nchar(df_prev$SAMPAREA_CODE) == 2 |
                        is.na(df_prev$SAMPAREA_CODE), ]
+
     ## Make an id to summarize a "sampling". Apparently, you cannot
     ## report the same number of samples and positives from the same
     ## marix in the same year and country. Therefore the following
@@ -128,8 +129,35 @@ prev_by_samplingID <- function(df_prev = read_prev()) {
           matrix = MATRIX_L1[1],
           matrix_txt = MATRIX[1],
           stage = SAMPSTAGE[1])
-    }
-  , by = .(samplingID)]
+    }, by = .(samplingID)]
+    df_prev
+}
+
+##' prev_by_SPA
+##'
+##' Aggregate by SPA type and only keep those that have a SPA type.
+##'
+##' @param df_prev the prevlance dataset
+##' @return An aggrigated dataset by SPA type
+##' @import data.table
+##' @export
+prev_by_SPA <- function(df_prev = read_prev()) {
+    ## Aggregate by samplingID
+    df_prev <- df_prev[!is.na(T), {
+        n <- sum(as.numeric(UNITSPOSITIVE), na.rm = TRUE)
+        stopifnot(all(!is.na(n)))
+        .(n = n,
+          year = REPYEAR[1],
+          source = SPECIESTYPE[1],
+          matrix = MATRIX_L1[1],
+          CC = CC_infer)
+    }, by = .(samplingID, SPA = T)]
+    df_prev[, {
+        x <- tapply(n, matrix, sum)
+        matrix <- paste(paste0(names(x), "(", x, ")"), collapse = ", ")
+        .(matrix = matrix,
+          Total = sum(n))
+    }, by = .(SPA, Year = year, source, CC)][order(SPA, Year)]
 }
 
 ##' read_AMR
