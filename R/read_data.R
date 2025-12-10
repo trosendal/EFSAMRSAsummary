@@ -136,54 +136,11 @@ read_prev <- function(path = prev_file(),
 ##'
 ##' @param path The local file path to the excel file
 ##' @param sheet The name of the sheet to read
-##' @param EUvet The classification of AB into levels of importance for public health
-##' @param AntibioticClass The classification of AB into functional groups
 ##' @import data.table
 ##' @return A data.table object
 ##' @export
 read_AMR <- function(path = isolate_file(),
-                     sheet = "QUERY_FOR_FULL_AMR_ISOL_DAT_000",
-                     EUvet =
-                         c("Cefoxitin" = "C", ## with the Cephalosporins
-                           "Chloramphenicol" = "C",
-                           "Ciprofloxacin" = "B", ## with other fluoroquinolones
-                           "Clindamycin" = "C",
-                           "Erythromycin" = "C",
-                           "Fusidic acid" = "D",
-                           "Gentamicin" = "C",
-                           "Kanamycin" = "C",
-                           "Linezolid" = "A",
-                           "Mupirocin" = "A",
-                           "Penicillin" = "D",
-                           "Quinupristin/Dalfopristin" = "A", ## with the Streptogramins
-                           "Rifampicin" = "A",
-                           "Streptomycin" = "C",
-                           "Sulfamethoxazole" = "D",
-                           "Tetracycline" = "D",
-                           "Tiamulin" = "C",
-                           "Trimethoprim" = "D",
-                           "Vancomycin" = "A"),
-                     AntibioticClass =
-                         c("Cefoxitin" = "Cephalosporin",
-                           "Chloramphenicol" = "Amphenicol",
-                           "Ciprofloxacin" = "Fluoroquinolone",
-                           "Clindamycin" = "Lincosamide",
-                           "Erythromycin" = "Macrolide",
-                           "Fusidic acid" = "Steroid antibacterial",
-                           "Gentamicin" = "Aminoglycoside",
-                           "Kanamycin" = "Aminoglycoside",
-                           "Linezolid" = "Oxazolidinone",
-                           "Mupirocin" = "Pseudomonic acid",
-                           "Penicillin" = "Natural penicillin",
-                           "Quinupristin/Dalfopristin" = "Streptogramin",
-                           "Rifampicin" = "Rifamycin",
-                           "Streptomycin" = "Aminoglycoside",
-                           "Sulfamethoxazole" = "Sulfonamide",
-                           "Tetracycline" = "Tetracycline",
-                           "Tiamulin" = "Pleuromutilin",
-                           "Trimethoprim" = "Dihydrofolate reductase inhibitor",
-                           "Vancomycin" = "Glycopeptide")
-                     ) {
+                     sheet = "QUERY_FOR_FULL_AMR_ISOL_DAT_000") {
 
     ## Read in the AMR data from the last two years. This appears to
     ## contain the AMR testing of MRSA isolates which is les
@@ -208,8 +165,8 @@ read_AMR <- function(path = isolate_file(),
     ## Classify the substances based on importance and function and
     ## give them short names:
     df_AMR[, `:=` (
-        EUvet = factor(EUvet[as.character(substance)], levels = c("A", "B", "C", "D")),
-        class = AntibioticClass[as.character(substance)],
+        EUvet = factor(EUvet(as.character(substance)), levels = c("A", "B", "C", "D")),
+        class = AntibioticClass(as.character(substance)),
         SFsubstance = AB(as.character(substance))
     )]
     stopifnot(all(!is.na(df_AMR$EUvet)))

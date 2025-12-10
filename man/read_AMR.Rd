@@ -4,34 +4,12 @@
 \alias{read_AMR}
 \title{read_AMR}
 \usage{
-read_AMR(
-  path = isolate_file(),
-  sheet = "QUERY_FOR_FULL_AMR_ISOL_DAT_000",
-  EUvet = c(Cefoxitin = "C", Chloramphenicol = "C", Ciprofloxacin = "B", Clindamycin =
-    "C", Erythromycin = "C", `Fusidic acid` = "D", Gentamicin = "C", Kanamycin = "C",
-    Linezolid = "A", Mupirocin = "A", Penicillin = "D", `Quinupristin/Dalfopristin` =
-    "A", Rifampicin = "A", Streptomycin = "C", Sulfamethoxazole = "D", Tetracycline =
-    "D", Tiamulin = "C", Trimethoprim = "D", Vancomycin = "A"),
-  AntibioticClass = c(Cefoxitin = "Cephalosporin", Chloramphenicol = "Amphenicol",
-    Ciprofloxacin = "Fluoroquinolone", Clindamycin = "Lincosamide", Erythromycin =
-    "Macrolide", `Fusidic acid` = "Steroid antibacterial", Gentamicin = "Aminoglycoside",
-    Kanamycin = "Aminoglycoside", Linezolid = "Oxazolidinone", Mupirocin =
-    "Pseudomonic acid", Penicillin = "Natural penicillin", `Quinupristin/Dalfopristin` =
-    "Streptogramin", Rifampicin = "Rifamycin", Streptomycin = "Aminoglycoside",
-    Sulfamethoxazole = "Sulfonamide", Tetracycline = "Tetracycline", 
-     Tiamulin =
-    "Pleuromutilin", Trimethoprim = "Dihydrofolate reductase inhibitor", Vancomycin =
-    "Glycopeptide")
-)
+read_AMR(path = isolate_file(), sheet = "QUERY_FOR_FULL_AMR_ISOL_DAT_000")
 }
 \arguments{
 \item{path}{The local file path to the excel file}
 
 \item{sheet}{The name of the sheet to read}
-
-\item{EUvet}{The classification of AB into levels of importance for public health}
-
-\item{AntibioticClass}{The classification of AB into functional groups}
 }
 \value{
 A data.table object

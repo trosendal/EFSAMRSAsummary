@@ -97,3 +97,64 @@ AB <- function(ab) {
     stopifnot(all(ab %in% names(AB)))
     AB[ab]
 }
+
+##' EUvet
+##'
+##' Classify AB into importance according to EUvet
+##'
+##' @param ab A vector of longform antibiotic names
+##' @return The class in A B C D where A is the most important
+EUvet <- function(ab) {
+    EUvet <-
+        c("Cefoxitin" = "C", ## with the Cephalosporins
+          "Chloramphenicol" = "C",
+          "Ciprofloxacin" = "B", ## with other fluoroquinolones
+          "Clindamycin" = "C",
+          "Erythromycin" = "C",
+          "Fusidic acid" = "D",
+          "Gentamicin" = "C",
+          "Kanamycin" = "C",
+          "Linezolid" = "A",
+          "Mupirocin" = "A",
+          "Penicillin" = "D",
+          "Quinupristin/Dalfopristin" = "A", ## with the Streptogramins
+          "Rifampicin" = "A",
+          "Streptomycin" = "C",
+          "Sulfamethoxazole" = "D",
+          "Tetracycline" = "D",
+          "Tiamulin" = "C",
+          "Trimethoprim" = "D",
+          "Vancomycin" = "A")
+    stopifnot(all(ab %in% names(EUvet)))
+    EUvet[ab]
+}
+
+##' AntibioticClass
+##'
+##' Classify AB into functional groups
+##'
+##' @param ab A vector of longform antibiotic names
+##' @return The class of antibiotic
+AntibioticClass <- function(ab) {
+    AntibioticClass <- c("Cefoxitin" = "Cephalosporin",
+                         "Chloramphenicol" = "Amphenicol",
+                         "Ciprofloxacin" = "Fluoroquinolone",
+                         "Clindamycin" = "Lincosamide",
+                         "Erythromycin" = "Macrolide",
+                         "Fusidic acid" = "Steroid antibacterial",
+                         "Gentamicin" = "Aminoglycoside",
+                         "Kanamycin" = "Aminoglycoside",
+                         "Linezolid" = "Oxazolidinone",
+                         "Mupirocin" = "Pseudomonic acid",
+                         "Penicillin" = "Natural penicillin",
+                         "Quinupristin/Dalfopristin" = "Streptogramin",
+                         "Rifampicin" = "Rifamycin",
+                         "Streptomycin" = "Aminoglycoside",
+                         "Sulfamethoxazole" = "Sulfonamide",
+                         "Tetracycline" = "Tetracycline",
+                         "Tiamulin" = "Pleuromutilin",
+                         "Trimethoprim" = "Dihydrofolate reductase inhibitor",
+                         "Vancomycin" = "Glycopeptide")
+    stopifnot(all(ab %in% names(AntibioticClass)))
+    AntibioticClass[ab]
+}
