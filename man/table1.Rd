@@ -4,10 +4,10 @@
 \alias{table1}
 \title{table1}
 \usage{
-table1(df_AMR = read_AMR(), path_csv = tempfile(fileext = ".csv"))
+table1(spaprev = prev_by_SPA(), path_csv = tempfile(fileext = ".csv"))
 }
 \arguments{
-\item{df_AMR}{The isolate based data object}
+\item{spaprev}{The object from the prev_by_SPA() function}
 
 \item{path_csv}{path to the output csv file}
 }

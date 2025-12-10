@@ -3,44 +3,64 @@
 ##' Table 1 - CC398 only in main chapter
 ##' Produce Table 1 in the main chapter
 ##'
-##' @param df_AMR The isolate based data object
+##' @param spaprev The object from the prev_by_SPA() function
 ##' @param path_csv path to the output csv file
 ##' @import data.table
 ##' @importFrom utils write.csv2
 ##' @return A path to a csv file
 ##' @export
-table1 <- function(df_AMR = read_AMR(),
+table1 <- function(spaprev = prev_by_SPA(),
                    path_csv = tempfile(fileext = ".csv")) {
-    ## Helper to format the text in the table
-    desc <- function(x) {
-        tab <- sort(table(x) / 19, decreasing = TRUE)
-        paste(paste0(names(tab), "(", tab, ")"), collapse = ", ")
-    }
-    tab <- df_AMR[!is.na(T) &
-                  CC_infer %in% c("398", "CC1/CC398"), .(N = .N / 19,
-                                                         desc = desc(matrix_L1)),
-                  by = .("spa-type" = sprintf("t%03d", as.numeric(T)),
-                         Year = repYear,
-                         source = speciesType)]
-    tab <- merge(tab[source == "animal",],
-                 tab[source == "food", ],
-                 by = c("spa-type", "Year"), all = TRUE)
-    tab[is.na(N.x), N.x := 0]
-    tab[is.na(N.y), N.y := 0]
-    tab[is.na(desc.x), desc.x := ""]
-    tab[is.na(desc.y), desc.y := ""]
-    tab[, sum_xy := sum(N.x, N.y), by = "spa-type"]
-    tab <- tab[order(sum_xy, `spa-type`, Year, decreasing = TRUE)]
-    tab <- tab[, c("spa-type", "Year", "desc.x", "N.x",
-                   "desc.y", "N.y")]
-    tab[, N.x := as.character(N.x)]
-    tab[, N.y := as.character(N.y)]
-    tab[N.x == "0", N.x := ""]
-    tab[N.y == "0", N.y := ""]
-    tab[, Year := as.numeric(Year)]
-    names(tab) <- c("spa-type", "Year", "Animals (N)", "Total",
-                    "Food (N)", "Total")
-    write.csv2(tab,
+
+    ## Sort for most common to least common across all types
+    sortorder <- spaprev[, sum(Total), by = .(SPA)][order(V1), SPA]
+
+    ## Just the CC398 spa types
+    df <- spaprev[CC %in% c("398", "CC1/CC398")]
+    df <- df[order(match(SPA, sortorder), Year, decreasing = TRUE)]
+
+    df <- df[, {
+        years <- sort(levels(Year), decreasing = TRUE)
+        ## First food
+        food1 <- matrix[source == "food" & Year == years[1]]
+        food1 <- ifelse(identical(food1, character(0)), "", food1)
+        foodtot1 <- Total[source == "food" & Year == years[1]]
+        foodtot1 <- ifelse(identical(foodtot1, numeric(0)), "", foodtot1)
+
+        ## first animal
+        animal1 <- matrix[source == "animal" & Year == years[1]]
+        animal1 <- ifelse(identical(animal1, character(0)), "", animal1)
+        animaltot1 <- Total[source == "animal" & Year == years[1]]
+        animaltot1 <- ifelse(identical(animaltot1, numeric(0)), "", animaltot1)
+
+        ## second food
+        food2 <- matrix[source == "food" & Year == years[2]]
+        food2 <- ifelse(identical(food2, character(0)), "", food2)
+        foodtot2 <- Total[source == "food" & Year == years[2]]
+        foodtot2 <- ifelse(identical(foodtot2, numeric(0)), "", foodtot2)
+
+        ## second animal
+        animal2 <- matrix[source == "animal" & Year == years[2]]
+        animal2 <- ifelse(identical(animal2, character(0)), "", animal2)
+        animaltot2 <- Total[source == "animal" & Year == years[2]]
+        animaltot2 <- ifelse(identical(animaltot2, numeric(0)), "", animaltot2)
+
+        data.frame(Year = as.numeric(years),
+                   animals = c(animal1, animal2),
+                   animaltot = as.character(c(animaltot1, animaltot2)),
+                   food = c(food1, food2),
+                   foodtot = as.character(c(foodtot1, foodtot2)))
+    }, by = .(SPA)]
+
+    ## Format the spatype
+    df$SPA <- sprintf("t%03d", as.numeric(df$SPA))
+
+    ## Drop completely empty rows
+    df <- df[animals != "" | food != ""]
+
+    names(df) <- c("spa-type", "Year", "Animals (N)", "Total",
+                   "Food (N)", "Total")
+    write.csv2(df,
                file = path_csv,
                row.names = FALSE,
                quote = TRUE)

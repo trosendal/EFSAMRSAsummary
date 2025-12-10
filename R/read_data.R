@@ -142,9 +142,13 @@ prev_by_samplingID <- function(df_prev = read_prev()) {
 ##' @import data.table
 ##' @export
 prev_by_SPA <- function(df_prev = read_prev()) {
-    years <- sort(unique(df_year$REPYEAR))
+    years <- sort(unique(df_prev$REPYEAR))
     ## Aggregate by samplingID
-    df_prev <- df_prev[!is.na(T), {
+    df_prev <- df_prev[!is.na(T) &
+                       PROGSAMPSTRATEGY != "Suspect sampling" &
+                       !(SAMPCONTEXT %in% c("Clinical investigations",
+                                             "Control and eradication programmes",
+                                             "Outbreak investigation")), {
         n <- sum(as.numeric(UNITSPOSITIVE), na.rm = TRUE)
         stopifnot(all(!is.na(n)))
         .(n = n,
