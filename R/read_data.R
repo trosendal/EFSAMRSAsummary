@@ -75,6 +75,24 @@ read_prev <- function(path = prev_file(),
     ## Add the datatable functionality to the object
     data.table::setDT(df_prev)
 
+    ## Infer some CCs based on ST and spa type:
+    ## Update ST from spa
+    df_prev[, `:=` (ST_infer = {
+        ST_infer <- ST
+        ST_infer[is.na(ST_infer)] <- spa2ST(.SD[["T"]][is.na(ST_infer)])
+        ST_infer
+    }
+    )]
+
+    ## Update CC for spa and ST
+    df_prev[, `:=` (CC_infer = {
+        CC_infer <- CC
+        CC_infer[is.na(CC_infer)] <- spa2CC(.SD[["T"]][is.na(CC_infer)])
+        CC_infer[is.na(CC_infer)] <- ST2CC(ST_infer[is.na(CC_infer)])
+        CC_infer
+    }
+    )]
+
     ## Aggregate by samplingID
     df_prev <- df_prev[, {
         N <- as.numeric(TOTUNITSTESTED)[1L]
@@ -91,8 +109,8 @@ read_prev <- function(path = prev_file(),
           SAMPCONTEXT = SAMPCONTEXT[1],
           year = REPYEAR[1],
           SPA = paste(T, collapse = ", "),
-          ST = paste(ST, collapse = ", "),
-          CC = paste(CC, collapse = ", "),
+          ST = paste(ST_infer, collapse = ", "),
+          CC = paste(CC_infer, collapse = ", "),
           source = SPECIESTYPE[1],
           matrix = MATRIX_L1[1],
           matrix_txt = MATRIX[1],
