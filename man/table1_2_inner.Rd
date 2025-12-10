@@ -5,7 +5,7 @@
 \title{table1_2_inner}
 \usage{
 table1_2_inner(
-  df_prev = read_prev(),
+  df_prev = prev_by_samplingID(),
   year = NULL,
   path_csv = tempfile(fileext = ".csv")
 )

@@ -5,7 +5,7 @@
 \title{tableE3_E4_inner}
 \usage{
 tableE3_E4_inner(
-  df_prev = read_prev(),
+  df_prev = prev_by_samplingID(),
   year = NULL,
   path_csv = tempfile(fileext = ".csv")
 )

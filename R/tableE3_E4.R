@@ -10,7 +10,7 @@
 ##' @import data.table
 ##' @return path to a csv file
 ##' @export
-tableE3 <- function(df_prev = read_prev(),
+tableE3 <- function(df_prev = prev_by_samplingID(),
                     year =  2024,
                     path_csv = tempfile(fileext = ".csv")) {
     tableE3_E4_inner(df_prev,
@@ -30,7 +30,7 @@ tableE3 <- function(df_prev = read_prev(),
 ##' @import data.table
 ##' @return path to a csv file
 ##' @export
-tableE4 <- function(df_prev = read_prev(),
+tableE4 <- function(df_prev = prev_by_samplingID(),
                     year =  2023,
                     path_csv = tempfile(fileext = ".csv")) {
     tableE3_E4_inner(df_prev,
@@ -46,7 +46,7 @@ tableE4 <- function(df_prev = read_prev(),
 ##' @param year the year to filter
 ##' @param path_csv path to csv file
 ##' @return a path to a csv file
-tableE3_E4_inner <- function(df_prev = read_prev(),
+tableE3_E4_inner <- function(df_prev = prev_by_samplingID(),
                              year =  NULL,
                              path_csv = tempfile(fileext = ".csv")) {
     stopifnot(is.numeric(year))

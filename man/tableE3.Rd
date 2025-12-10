@@ -5,7 +5,7 @@
 \title{tableE3}
 \usage{
 tableE3(
-  df_prev = read_prev(),
+  df_prev = prev_by_samplingID(),
   year = 2024,
   path_csv = tempfile(fileext = ".csv")
 )

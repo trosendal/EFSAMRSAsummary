@@ -7,7 +7,7 @@
 ##' @import data.table
 ##' @return A plot
 ##' @export
-figure2 <- function(df_prev = read_prev(),
+figure2 <- function(df_prev = prev_by_samplingID(),
                     years =  c(2023, 2024)) {
     nonfood <- c("Dogs", "Felidae", "Solipeds, domestic")
     tab1 <- df_prev[year %in% years &

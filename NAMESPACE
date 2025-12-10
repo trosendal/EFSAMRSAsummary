@@ -3,6 +3,7 @@
 export(collapse_AMR)
 export(figure1)
 export(figure2)
+export(prev_by_samplingID)
 export(read_AMR)
 export(read_prev)
 export(table1)

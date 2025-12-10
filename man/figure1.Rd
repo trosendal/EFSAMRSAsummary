@@ -4,7 +4,7 @@
 \alias{figure1}
 \title{figure1}
 \usage{
-figure1(df_prev = read_prev(), years = c(2023, 2024))
+figure1(df_prev = prev_by_samplingID(), years = c(2023, 2024))
 }
 \arguments{
 \item{df_prev}{The data object}

@@ -5,7 +5,7 @@
 \title{tableE5_E6_E7_inner}
 \usage{
 tableE5_E6_E7_inner(
-  df_prev = read_prev(),
+  df_prev = prev_by_samplingID(),
   year = NULL,
   food = FALSE,
   path_csv = tempfile(fileext = ".csv")

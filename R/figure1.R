@@ -11,7 +11,7 @@
 ##' @importFrom graphics text
 ##' @return A plot
 ##' @export
-figure1 <- function(df_prev = read_prev(),
+figure1 <- function(df_prev = prev_by_samplingID(),
                     years =  c(2023, 2024)) {
     tab1 <- df_prev[year %in% years &
                     source == "food",

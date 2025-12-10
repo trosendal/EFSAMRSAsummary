@@ -93,6 +93,19 @@ read_prev <- function(path = prev_file(),
     }
     )]
 
+    df_prev
+}
+
+##' prev_by_samplingID
+##'
+##' Aggregate by sampling ID. This is the YEAR, MATRIX_C, SAMPUNIT,
+##' REPCOUNTRY, SAMPAREA, TOTUNITSTESTED and TOTUNITSPOSITIVE.
+##'
+##' @param df_prev the prevlance dataset
+##' @return An aggrigated dataset by samplingID
+##' @import data.table
+##' @export
+prev_by_samplingID <- function(df_prev = read_prev()) {
     ## Aggregate by samplingID
     df_prev <- df_prev[, {
         N <- as.numeric(TOTUNITSTESTED)[1L]

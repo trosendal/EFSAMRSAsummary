@@ -10,7 +10,7 @@
 ##' @import data.table
 ##' @return path to a csv file
 ##' @export
-tableE5 <- function(df_prev = read_prev(),
+tableE5 <- function(df_prev = prev_by_samplingID(),
                     year =  2024,
                     food = TRUE,
                     path_csv = tempfile(fileext = ".csv")) {
@@ -32,7 +32,7 @@ tableE5 <- function(df_prev = read_prev(),
 ##' @import data.table
 ##' @return path to a csv file
 ##' @export
-tableE6 <- function(df_prev = read_prev(),
+tableE6 <- function(df_prev = prev_by_samplingID(),
                     year =  2024,
                     food = FALSE,
                     path_csv = tempfile(fileext = ".csv")) {
@@ -55,7 +55,7 @@ tableE6 <- function(df_prev = read_prev(),
 ##' @import data.table
 ##' @return path to a csv file
 ##' @export
-tableE7 <- function(df_prev = read_prev(),
+tableE7 <- function(df_prev = prev_by_samplingID(),
                     year =  2023,
                     food = FALSE,
                     path_csv = tempfile(fileext = ".csv")) {
@@ -75,7 +75,7 @@ tableE7 <- function(df_prev = read_prev(),
 ##' @param path_csv path to a csv file
 ##' @import data.table
 ##' @return path to a csv file
-tableE5_E6_E7_inner <- function(df_prev = read_prev(),
+tableE5_E6_E7_inner <- function(df_prev = prev_by_samplingID(),
                                 year =  NULL,
                                 food = FALSE,
                                 path_csv = tempfile(fileext = ".csv")) {
