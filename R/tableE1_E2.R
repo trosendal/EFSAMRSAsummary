@@ -3,6 +3,17 @@
 ##' Produce Annex E Table 1: Methicillin-resistant Staphylococcus
 ##' aureus in food, 2024.
 ##'
+##' In the 2024 data as of 2025-12-10 there is a mistake in the German
+##' reports in the prevlance data. This has resulted in an incorrect
+##' numerator (number of positives) for the German: broiler meat,
+##' turkey meat and crustaceans. In order to correct this we have used these three numbers from the isolate based data like this:
+##'
+##' foo <- collapse_AMR(read_AMR())
+##' setDT(foo)
+##' foo[year == 2024,
+##'     .(pos = sum(as.numeric(unique(totUnitsPositive))), tot = max(totUnitsTested)),
+##'     by = .(source, matrix, country)]
+##'
 ##' @param df_prev The data object
 ##' @param year the year to filter
 ##' @param path_csv path to a csv file
