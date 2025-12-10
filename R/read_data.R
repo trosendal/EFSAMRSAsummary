@@ -186,42 +186,6 @@ read_AMR <- function(path = isolate_file(),
                            "Tiamulin" = "Pleuromutilin",
                            "Trimethoprim" = "Dihydrofolate reductase inhibitor",
                            "Vancomycin" = "Glycopeptide"),
-                     spa2CC =
-                         c("11" = 398, "34" = 398, "108" = 398,
-                           "571" = 398, "588" = 398, "1255" = 398,
-                           "1451" = 398, "1456" = 398, "1580" = 398,
-                           "1793" = 398, "2011" = 398, "2330" = 398,
-                           "2346" = 398, "2576" = 398, "2922" = 398,
-                           "5452" = 398, "6228" = 398, "6575" = 398,
-                           "10485" = 398, "19248" = 398,
-                           ##(Battisti et al., 2010; EFSA 2009a ; Kinross et al.,
-                           ##2017 ; Köck et al., 2013 ; Pauly et al., 2019 ;Tkadlec
-                           ##et al., 2023).
-                           "899" = "CC1/CC398",
-                           ##If ST and/or CC was not specified, spa-type t899 was
-                           ##classified as CC1/CC398 (EFSA, 2009a ; Guardabassi et
-                           ##al., 2009 ; Larsen et al., 2016).
-                           "127" = 1,
-                           ## spa-type t127 was classified as CC1, LA-MRSA (EFSA,
-                           ## 2009 ; Merialdi et al., 2019).
-                           "2" = 5, "242" = 5,
-                           ## spa-types t002 and t242 were classified as CC5 (Asanin
-                           ## et al., 2019 ; Köck et al., 2013).
-                           "8" = 8, "9" = 8,
-                           ## spa-types t008 and t009 were classified as CC8 (Boost
-                           ## et al., 2012 ; Cuny et al., 2016).
-                           "1419" = 1, "1430" = 1, "10204" = 1,
-                           ## spa-types t1419, t1430 and t10204 were associated to
-                           ## ST9 (EFSA, 2009a ; Hasman et al., 2011 ; Köck et al.,
-                           ## 2013), and classified as CC1 (PubMLST1).
-                           "1422" = 692,
-                           ## spa-type t1422 was classified as CC692 (Silva et al.,
-                           ## 2020).
-                           "3512" = 2343 ## spa-type t3512 was
-                                         ## classified as ST2343 (Chen
-                                         ## et al., 2017) and CC1
-                           ## (PubMLST1).
-                           ),
                      spa2ST =
                          c("1419" = 9, "1430" = 9, "10204" = 9),
                      ## spa-types t1419, t1430 and t10204 were associated to ST9 (EFSA,
@@ -290,7 +254,7 @@ read_AMR <- function(path = isolate_file(),
     ## Update CC for spa and ST
     df_AMR[, `:=` (CC_infer = {
         CC_infer <- CC
-        CC_infer[is.na(CC_infer)] <- spa2CC[.SD[["T"]]][is.na(CC_infer)]
+        CC_infer[is.na(CC_infer)] <- spa2CC(.SD[["T"]][is.na(CC_infer)])
         CC_infer[is.na(CC_infer)] <- ST2CC(ST_infer[is.na(CC_infer)])
         CC_infer
     }

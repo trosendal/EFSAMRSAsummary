@@ -22,11 +22,6 @@ read_AMR(
      Tiamulin =
     "Pleuromutilin", Trimethoprim = "Dihydrofolate reductase inhibitor", Vancomycin =
     "Glycopeptide"),
-  spa2CC = c(`11` = 398, `34` = 398, `108` = 398, `571` = 398, `588` = 398, `1255` = 398,
-    `1451` = 398, `1456` = 398, `1580` = 398, `1793` = 398, `2011` = 398, `2330` = 398,
-    `2346` = 398, `2576` = 398, `2922` = 398, `5452` = 398, `6228` = 398, `6575` = 398,
-    `10485` = 398, `19248` = 398, `899` = "CC1/CC398", `127` = 1, `2` = 5, `242` = 5, `8`
-    = 8, `9` = 8, `1419` = 1, `1430` = 1, `10204` = 1, `1422` = 692, `3512` = 2343),
   spa2ST = c(`1419` = 9, `1430` = 9, `10204` = 9),
   AB = c(Gentamicin = "GEN", Kanamycin = "KAN", Streptomycin = "STR", Chloramphenicol =
     "CHL", Rifampicin = "RIF", Ciprofloxacin = "CIP", Erythromycin = "ERY", Clindamycin =
@@ -45,11 +40,11 @@ read_AMR(
 
 \item{AntibioticClass}{The classification of AB into functional groups}
 
-\item{spa2CC}{Rules for how to classify isolates with spatype but no CC}
-
 \item{spa2ST}{Rules for how to classify isoaltes with spatype but no ST}
 
 \item{AB}{shortforms of AB}
+
+\item{spa2CC}{Rules for how to classify isolates with spatype but no CC}
 }
 \value{
 A data.table object

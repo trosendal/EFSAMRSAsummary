@@ -6,8 +6,11 @@
 \usage{
 ST2CC(ST)
 }
+\arguments{
+\item{ST}{a vector of STs}
+}
 \value{
-A vector of infered CC from ST
+A vector of inferred CC from ST
 }
 \description{
 STs 9 and 8325 were classified as CC1 by PubMLST1.
