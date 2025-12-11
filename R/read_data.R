@@ -265,6 +265,9 @@ read_AMR <- function(path = isolate_file(),
     }
     )]
 
+    ## host association inference from spa
+    df_AMR[, host_association := host_association(T)]
+
     mec <- c("mecA",
              "mecA gene = +",
              "mecA gene = +, CC = Non-398",
