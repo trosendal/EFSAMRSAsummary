@@ -27,7 +27,8 @@ tableE8 <- function(df_AMR = read_AMR(),
         ST       = collapse_unique(ST),
         CC       = collapse_unique(CC),
         iCC      = collapse_unique(CC_infer),
-        iST      = collapse_unique(ST_infer)
+        iST      = collapse_unique(ST_infer),
+        host     = ifelse(is.na(host_association[1]), "", host_association[1])
     ), by = .(speciesType, repCountry, matrix_L1,
               sampUnitType, spatype, LABISOLCODE)]
     ##
@@ -38,7 +39,8 @@ tableE8 <- function(df_AMR = read_AMR(),
         ST       = collapse_unique(ST),
         CC       = collapse_unique(CC),
         iCC      = collapse_unique(iCC),
-        iST      = collapse_unique(iST)
+        iST      = collapse_unique(iST),
+        host     = host[1]
     ), by = .(Category = speciesType,
               Country  = repCountry,
               AnimalFoodType = matrix_L1,
@@ -50,7 +52,7 @@ tableE8 <- function(df_AMR = read_AMR(),
     tab[, `mec-gene` := fifelse(mecA_any & mecC_any, "mecA, mecC",
                                 fifelse(mecA_any & !mecC_any, "mecA",
                                         fifelse(!mecA_any & mecC_any, "mecC", "-mecA, -mecC")))]
-    tab[, `LA, CA or HA` := ""]
+    tab[, `LA, CA or HA` := host]
     setnames(tab, c("iCC","iST"), c("Inferred CC","Inferred ST/CC & type"))
     tab <- tab[order(tab$Category,
                      tab$Country,
