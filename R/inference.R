@@ -158,3 +158,61 @@ AntibioticClass <- function(ab) {
     stopifnot(all(ab %in% names(AntibioticClass)))
     AntibioticClass[ab]
 }
+
+##' host_association
+##'
+##' estimate the host association of the SPA type
+##'
+##' @param spa The spa type
+##' @export
+##' @return A vector of the host association
+host_association <- function(spa) {
+    tl <- c("2" = "HA",
+            "8" = "CA/HA",
+            "9" = "CA/HA",
+            "11" = "LA",
+            "34" = "LA",
+            "108" = "LA",
+            "127" = "LA",
+            "235" = "LA",
+            "242" = "HA",
+            "538" = "LA",
+            "571" = "LA",
+            "588" = "LA",
+            "693" = "LA",
+            "779" = "LA",
+            "899" = "LA",
+            "1255" = "LA",
+            "1419" = "LA",
+            "1422" = "LA",
+            "1430" = "LA",
+            "1451" = "LA",
+            "1456" = "LA",
+            "1457" = "LA",
+            "1580" = "LA",
+            "1793" = "LA",
+            "2011" = "LA",
+            "2330" = "LA",
+            "2346" = "LA",
+            "2576" = "LA",
+            "2922" = "LA",
+            "3075" = "LA",
+            "3423" = "LA",
+            "3512" = "LA",
+            "4652" = "LA",
+            "5104" = "LA",
+            "5452" = "LA",
+            "5524" = "LA",
+            "6228" = "LA",
+            "6575" = "LA",
+            "6608" = "LA",
+            "10204" = "LA",
+            "10485" = "LA",
+            "14089" = "LA",
+            "15528" = "LA",
+            "16666" = "LA",
+            "19248" = "LA",
+            "20072" = "HA",
+            "21217" = "LA")
+    tl[spa]
+}

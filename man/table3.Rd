@@ -5,7 +5,7 @@
 \title{table3}
 \usage{
 table3(
-  spaprev = prev_by_SPA(inferCC = FALSE),
+  spaprev = prev_by_SPA(inferCC = TRUE),
   path_csv = tempfile(fileext = ".csv")
 )
 }
