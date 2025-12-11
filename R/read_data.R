@@ -147,6 +147,12 @@ prev_by_samplingID <- function(df_prev = read_prev()) {
 prev_by_SPA <- function(df_prev = read_prev(),
                         inferCC = TRUE) {
     years <- sort(unique(df_prev$REPYEAR))
+
+    ## inference of CC or not
+    if (isTRUE(inferCC)) {
+        df_prev$CC <- df_prev$CC_infer
+    }
+
     ## Aggregate by samplingID
     df_prev <- df_prev[!is.na(T) &
                        PROGSAMPSTRATEGY != "Suspect sampling" &
@@ -159,7 +165,7 @@ prev_by_SPA <- function(df_prev = read_prev(),
           year = factor(REPYEAR[1], levels = years),
           source = factor(SPECIESTYPE[1], levels = c("animal", "food")),
           matrix = MATRIX_L1[1],
-          CC = CC_infer)
+          CC = CC)
     }, by = .(samplingID, SPA = T)]
     df_prev[, {
         x <- tapply(n, matrix, sum)
