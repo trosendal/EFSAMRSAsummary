@@ -4,10 +4,10 @@
 \alias{table123_inner}
 \title{table123_inner}
 \usage{
-table123_inner(df, path_csv)
+table123_inner(data = read_prev(), path_csv)
 }
 \arguments{
-\item{df}{the subset of prev_by_SPA}
+\item{data}{the data from read_prev()}
 
 \item{path_csv}{path to the csv file}
 }

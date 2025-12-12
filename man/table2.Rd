@@ -4,13 +4,10 @@
 \alias{table2}
 \title{table2}
 \usage{
-table2(
-  spaprev = prev_by_SPA(inferCC = TRUE),
-  path_csv = tempfile(fileext = ".csv")
-)
+table2(df_prev = read_prev(), path_csv = tempfile(fileext = ".csv"))
 }
 \arguments{
-\item{spaprev}{The object from the prev_by_SPA() function}
+\item{df_prev}{The object read_prev function}
 
 \item{path_csv}{path to the output csv file}
 }
