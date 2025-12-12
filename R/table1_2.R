@@ -102,6 +102,8 @@ table123_inner <- function(data = read_prev(),
     data <- dcast(data, SPA + REPYEAR ~ SPECIESTYPE, value.var = c("text", "n"))
     data[is.na(n_animal) == TRUE, n_animal := 0]
     data[is.na(n_food) == TRUE, n_food := 0]
+    data[is.na(text_animal) == TRUE, text_animal := ""]
+    data[is.na(text_food) == TRUE, text_food := ""]
     data[, sort_order := sum(n_animal + n_food), by = SPA]
     data <- data[order(-sort_order, SPA, -REPYEAR)]
     data[, sort_order := NULL]
