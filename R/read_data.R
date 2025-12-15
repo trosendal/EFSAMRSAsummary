@@ -61,17 +61,13 @@ read_prev <- function(path = prev_file(),
     ## report the same number of samples and positives from the same
     ## marix in the same year and country. Therefore the following
     ## rows should be collapsed:
-    df_prev$samplingID <- as.numeric(
-        as.factor(
-            paste0(df_prev$REPYEAR,
-                   df_prev$MATRIX_C,
-                   df_prev$SAMPUNIT,
-                   df_prev$REPCOUNTRY,
-                   df_prev$SAMPAREA,
-                   df_prev$TOTUNITSTESTED,
-                   df_prev$TOTUNITSPOSITIVE)
-        )
-    )
+    df_prev$samplingID <- paste0(df_prev$REPYEAR,
+                                 df_prev$MATRIX_C,
+                                 df_prev$SAMPUNIT,
+                                 df_prev$REPCOUNTRY,
+                                 df_prev$SAMPAREA,
+                                 df_prev$TOTUNITSTESTED,
+                                 df_prev$TOTUNITSPOSITIVE)
 
     ## Add the datatable functionality to the object
     data.table::setDT(df_prev)
@@ -224,6 +220,15 @@ read_AMR <- function(path = isolate_file(),
     df_AMR <- readxl::read_xlsx(path,
                                 col_types = "text",
                                 sheet = sheet)
+
+    ## In order to match the the samples between prev and AMR data
+    df_AMR$samplingID <- paste0(df_AMR$repYear,
+                            df_AMR$matrix_C,
+                            df_AMR$sampUnitType,
+                            df_AMR$repCountry,
+                            df_AMR$sampArea,
+                            df_AMR$totUnitsTested,
+                            df_AMR$totUnitsPositive)
 
     ## confir data.table'ness on the object
     setDT(df_AMR)
