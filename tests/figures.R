@@ -20,7 +20,6 @@ stopifnot(identical(obs, ex))
 
 ## Figure 2
 obs <- EFSAMRSAsummary::figure2(check = TRUE)
-dput(obs)
 ex <- structure(c(27, 5, 156, 8, 322, 3, 129, 1, 310, 166, 130, 27,
                   114, 81, 351, 91, 307, 11, 316, 2, 356, 84),
                 dim = c(2L, 11L),
