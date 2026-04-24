@@ -4,6 +4,8 @@
 ##'
 ##' @param df_prev The data object
 ##' @param years the years to filter
+##' @param check FALSE by default. If TRUE then the function returns
+##'     the processed data for testing purposes.
 ##' @import data.table
 ##' @importFrom graphics barplot
 ##' @importFrom graphics legend
@@ -12,7 +14,8 @@
 ##' @return A plot
 ##' @export
 figure1 <- function(df_prev = prev_by_samplingID(),
-                    years =  c(2023, 2024)) {
+                    years =  c(2023, 2024),
+                    check = FALSE) {
     tab1 <- df_prev[year %in% years &
                     source == "food",
                     .(N = sum(N), n = sum(n), prop = sum(n) / sum (N)),
@@ -62,6 +65,7 @@ figure1 <- function(df_prev = prev_by_samplingID(),
                             ", ",
                             tabgraph$year, ")")
     mat <- mat[, seq(ncol(mat), 1)]
+    if (isTRUE(check)) return(mat)
 
     par(mar = c(8, 11, 0, 8))
     cols <- c("#409fff", "#ffb740")

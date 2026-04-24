@@ -4,11 +4,14 @@
 ##'
 ##' @param df_prev The data object
 ##' @param years the years to filter
+##' @param check FALSE by default. If TRUE the function returns the
+##'     processed data for testing purposes.
 ##' @import data.table
 ##' @return A plot
 ##' @export
 figure2 <- function(df_prev = prev_by_samplingID(),
-                    years =  c(2023, 2024)) {
+                    years =  c(2023, 2024),
+                    check = FALSE) {
     nonfood <- c("Dogs", "Felidae", "Solipeds, domestic")
     tab1 <- df_prev[year %in% years &
                     source == "animal" &
@@ -54,6 +57,8 @@ figure2 <- function(df_prev = prev_by_samplingID(),
                             ", ",
                             tabgraph$year, ")")
     mat <- mat[, seq(ncol(mat), 1)]
+    if (isTRUE(check)) return(mat)
+
     par(mar = c(8, 12, 0, 6))
     cols <- c("#409fff", "#ffb740")
     bp <- barplot(mat,

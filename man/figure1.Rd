@@ -4,12 +4,15 @@
 \alias{figure1}
 \title{figure1}
 \usage{
-figure1(df_prev = prev_by_samplingID(), years = c(2023, 2024))
+figure1(df_prev = prev_by_samplingID(), years = c(2023, 2024), check = FALSE)
 }
 \arguments{
 \item{df_prev}{The data object}
 
 \item{years}{the years to filter}
+
+\item{check}{FALSE by default. If TRUE then the function returns
+the processed data for testing purposes.}
 }
 \value{
 A plot
