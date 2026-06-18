@@ -217,9 +217,16 @@ read_AMR <- function(path = isolate_file(),
     ## exptensive than the prevalence data. repYear is used to filter
     ## reporting year. LABISOLCODE is the unique isolate where 19
     ## analyses are done per isolate.
-    df_AMR <- readxl::read_xlsx(path,
-                                col_types = "text",
-                                sheet = sheet)
+    if (tools::file_ext(path) == "xlsx") {
+        df_AMR <- readxl::read_xlsx(path,
+                                    col_types = "text",
+                                    sheet = sheet)
+    }
+
+    if (tools::file_ext(path) == "xlsx") {
+        df_AMR <- data.table::fread(path,
+                                    colClasses = "character")
+    }
 
     ## In order to match the the samples between prev and AMR data
     df_AMR$samplingID <- paste0(df_AMR$repYear,
