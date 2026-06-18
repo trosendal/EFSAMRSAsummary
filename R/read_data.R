@@ -293,7 +293,9 @@ read_AMR <- function(path = isolate_file(),
              "CC untypable, mecC",
              "mecC gene; Project PRR C05-i03-I-000190 - RumiRes, European Union NextGenerationEU.",
              "no presence of mec genes; Project PRR C05-i03-I-000190 - RumiRes, European Union NextGenerationEU.",
-             "mecA gene; Project PRR C05-i03-I-000190 - RumiRes, European Union NextGenerationEU.")
+             "mecA gene; Project PRR C05-i03-I-000190 - RumiRes, European Union NextGenerationEU.",
+             "N_A")
+
     stopifnot(all(df_AMR$resComm %in% mec))
 
     ## Create a mecA column
