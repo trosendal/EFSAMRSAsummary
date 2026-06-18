@@ -243,7 +243,7 @@ read_AMR <- function(path = isolate_file(),
     ## Establish the substance variable
     df_AMR[, substance := {
         x <- substance_L2
-        x[is.na(x) | x == ""] <- substance_L1[is.na(x)]
+        x[is.na(x) | x == ""] <- substance_L1[is.na(x) | x == ""]
         as.factor(x)
     }]
     stopifnot(all(!is.na(df_AMR$substance)))
