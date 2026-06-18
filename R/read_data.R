@@ -223,7 +223,7 @@ read_AMR <- function(path = isolate_file(),
                                     sheet = sheet)
     }
 
-    if (tools::file_ext(path) == "xlsx") {
+    if (tools::file_ext(path) == "csv") {
         df_AMR <- data.table::fread(path,
                                     colClasses = "character")
     }
