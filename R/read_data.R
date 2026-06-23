@@ -57,6 +57,10 @@ read_prev <- function(path = prev_file(),
     df_prev <- df_prev[nchar(df_prev$SAMPAREA_CODE) == 2 |
                        is.na(df_prev$SAMPAREA_CODE), ]
 
+    ## Clean up some variables prior to making unique ID
+    SAMPAREA_CODE <- df_prev$SAMPAREA_CODE
+    SAMPAREA_CODE[is.na(SAMPAREA_CODE)] <- df_prev$REPCOUNTRY_C[is.na(SAMPAREA_CODE)]
+
     ## Make an id to summarize a "sampling". Apparently, you cannot
     ## report the same number of samples and positives from the same
     ## marix in the same year and country. Therefore the following
@@ -65,7 +69,7 @@ read_prev <- function(path = prev_file(),
                                  df_prev$MATRIX_C,
                                  df_prev$SAMPUNIT_C,
                                  df_prev$REPCOUNTRY,
-                                 df_prev$SAMPAREA,
+                                 SAMPAREA_CODE,
                                  df_prev$TOTUNITSTESTED,
                                  df_prev$TOTUNITSPOSITIVE)
 
@@ -228,12 +232,27 @@ read_AMR <- function(path = isolate_file(),
                                     colClasses = "character")
     }
 
+    ## For the unique IDs we will modify some of the varibles to get
+    ## consistent results. If sampArea is is missing it is replaced
+    ## with sampOrig_C and if sampArea ends with a 0 it means that it
+    ## is the country level and we can drop that character.
+    sampArea <- df_AMR$sampArea
+    sampArea[is.na(sampArea)] <- df_AMR$sampOrig_C[is.na(sampArea)]
+    split_data <- regmatches(sampArea,
+                             regexec("^([A-Z]+)(\\d*)$", sampArea))
+    letters_part <- sapply(split_data, function(x) x[2])
+    numbers_part <- sapply(split_data, function(x) {
+        if (length(x) >= 3) x[3] else ""
+    })
+    numbers_part[as.numeric(numbers_part) == 0] <- ""
+    sampArea <- paste0(letters_part, numbers_part)
+
     ## In order to match the the samples between prev and AMR data
     df_AMR$samplingID <- paste0(df_AMR$repYear,
                                 df_AMR$matrix_C,
                                 df_AMR$sampUnitType_C,
                                 df_AMR$repCountry,
-                                df_AMR$sampArea,
+                                sampArea,
                                 df_AMR$totUnitsTested,
                                 df_AMR$totUnitsPositive)
 
@@ -306,7 +325,7 @@ read_AMR <- function(path = isolate_file(),
     ## define the isolates as food, food animals or companion animals
     nonfood <- c("Dogs", "Felidae", "Solipeds, domestic", "Land game mammals")
     foodproducing <- c("Pigs", "Cattle (bovine animals)", "Gallus gallus (fowl)",
-                        "Small ruminants")
+                       "Small ruminants")
     df_AMR$animalclass <- NA
     df_AMR$animalclass[df_AMR$matrix_L1 %in% nonfood] <- "Companion animals"
     df_AMR$animalclass[df_AMR$matrix_L1 %in% foodproducing] <- "Food producing animals"
